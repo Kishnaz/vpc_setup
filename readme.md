@@ -1,3 +1,6 @@
+Creating the VPC and basic set up 
+---------------------------------
+
 •	Creating a VPC 
 
 •	Creating the Subnet’s (Public & Private) 
