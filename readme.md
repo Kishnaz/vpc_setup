@@ -1,11 +1,19 @@
 •	Creating a VPC 
+
 •	Creating the Subnet’s (Public & Private) 
+
 •	Creating NAT & IGW
+
 •	Subnet association - with IGW
+
 •	Subnet association - with NAT 
+
 •	NACL rule setting 
+
 •	SG creation & Port allocation 
+
 •	Creating an EC2 in Public Subnet for Web Server (NGINX)
+
 •	Creating an EC2 in Private Subnet as App Server (Tomcat) 
 
 
