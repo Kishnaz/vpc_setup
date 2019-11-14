@@ -10,7 +10,8 @@ resource "aws_vpc" "terraform-vpc" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags  = {
-    Environment = "${var.environment_tag}"
+     Environment = "${var.environment_tag}"
+     Name = "Terrafrom-VPC"
   }
 }
 #### Public Subnet - var.cidr_public_subnet
@@ -22,7 +23,7 @@ resource "aws_subnet" "subnet_public" {
   availability_zone = "${var.availability_zone}"
   tags  = {
     Environment = "${var.environment_tag}"
-    Action = "Public Subnet Creation"
+    Name = "Terraform Public Subnet"
   }
 }
 
@@ -35,7 +36,7 @@ resource "aws_subnet" "subnet_private" {
   availability_zone = "${var.availability_zone}"
   tags = {
     Environment = "${var.environment_tag}"
-    Action = "Private Subnet Creation"
+    Name = "Terraform Private Subnet"
   }
 }
 
@@ -45,7 +46,7 @@ resource "aws_internet_gateway" "terraform-igw" {
   vpc_id = "${aws_vpc.terraform-vpc.id}"
   tags = {
     Environment = "${var.environment_tag}"
-    Action = "IGW Creation"
+    Name = "Terraform-IGW"
   }
 }
 
@@ -61,7 +62,7 @@ resource "aws_nat_gateway" "terraform-NAT" {
   subnet_id     = "${aws_subnet.subnet_public.id}"
   tags = {
     Environment = "${var.environment_tag}"
-    Action = "NAT Creation"
+    Name  = "Terraform-NAT"
   }
 }
 
@@ -79,7 +80,7 @@ route {
 
 tags = {
     Environment = "${var.environment_tag}"
-    Action = "Custom RTB Creation for Public"
+    Name = "Terraform Custom RTB for Public"
   }
 }
 
@@ -110,7 +111,7 @@ route {
 
 tags = {
     Environment = "${var.environment_tag}"
-    Action = "Custom RTB Creation for Private"
+    Name = "Terraform Custom RTB for Private"
   }
 }
 
@@ -157,6 +158,10 @@ resource "aws_security_group" "web-sg" {
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
   }
+
+tags = {
+    Name = "web-sg"
+  }
 }
 
 
@@ -173,6 +178,11 @@ resource "aws_instance" "webserver" {
       sudo amazon-linux-extras install nginx1 -y
       service nginx start
       EOF
+
+tags = {
+    Name = "Terraform-WebServer"
+  }
+
 }
 
 
@@ -196,6 +206,10 @@ resource "aws_security_group" "app-sg" {
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
   }
+
+tags = {
+    Name = "app-sg"
+  }
 }
 
 
@@ -213,4 +227,8 @@ resource "aws_instance" "appserver" {
       sudo yum install tomcat-webapps tomcat-docs-webapp tomcat-admin-webapps -y
       service tomcat start
       EOF
+
+tags = {
+    Name = "Terraform-AppServer"
+  }
 }
