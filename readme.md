@@ -1,4 +1,4 @@
-Creating the VPC and basic set up 
+Creating the Basic VPC and set up
 ---------------------------------
 
 •	Creating a VPC 
